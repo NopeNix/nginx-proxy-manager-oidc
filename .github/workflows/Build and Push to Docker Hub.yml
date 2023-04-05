@@ -43,8 +43,8 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v4
         with:
-          context: .
-          dockerfile: ./docker/Dockerfile
+          context: ./nginx-proxy-manager/docker/
+          dockerfile: ./nginx-proxy-manager/docker/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: nopenix/nginx-proxy-manager-oidc
