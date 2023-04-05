@@ -40,5 +40,21 @@ jobs:
         name: Run Prepare-Build.ps1 Script
         run: pwsh Prepare-Build.ps1
       -
-        name: Build
+        name: Buildx
         run: ./nginx-proxy-manager/scripts/buildx
+      -
+        name: Push to Docker Hub
+        run: ./nginx-proxy-manager/scripts/buildx
+
+
+
+
+        uses: docker/build-push-action@v4
+        with:
+          context: ./nginx-proxy-manager/docker/
+          dockerfile: ./nginx-proxy-manager/docker/Dockerfile
+          platforms: linux/amd64,linux/arm64
+          push: true
+          tags: nopenix/nginx-proxy-manager-oidc
+
+      

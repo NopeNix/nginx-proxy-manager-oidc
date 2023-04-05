@@ -12,14 +12,14 @@ cd ./nginx-proxy-manager
 git checkout openidc
 cd ..
 
+# Getting latest package.json file
+Write-Host "Getting latest package.json File.." -ForegroundColor Blue
+curl -s -o ./nginx-proxy-manager/frontend/package.json https://raw.githubusercontent.com/NginxProxyManager/nginx-proxy-manager/master/frontend/package.json
+
 # Change Image name in frontend-build File and dockerfile
 Write-Host "Changing Image Name in frontend-build File and dockerfile..." -ForegroundColor Blue
 ((Get-Content ./nginx-proxy-manager/scripts/frontend-build).replace('jc21/nginx-full:node', 'nginxproxymanager/nginx-full:certbot-node') | Set-Content ./nginx-proxy-manager/scripts/frontend-build)
 ((Get-Content ./nginx-proxy-manager/docker/Dockerfile).replace('nginxproxymanager/nginx-full:node', 'nginxproxymanager/nginx-full:certbot-node') | Set-Content ./nginx-proxy-manager/docker/Dockerfile)
-
-# Getting latest package.json file
-Write-Host "Getting latest package.json File.." -ForegroundColor Blue
-curl -s -o ./nginx-proxy-manager/frontend/package.json https://raw.githubusercontent.com/NginxProxyManager/nginx-proxy-manager/master/frontend/package.json
 
 # Run /scripts/frontend-build
 Write-Host "Running Frontent Build Script..." -ForegroundColor Blue
